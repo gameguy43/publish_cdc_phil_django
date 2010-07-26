@@ -29,15 +29,33 @@ def view_random(request):
     return HttpResponseRedirect(url_to_redirect_to)
 
 def view_image(request, image__pk):
+    db_connection = get_metadata_db_connection()
+    image_tuples = db_connection.execute("select * from phil where id = %s" % image__pk).fetchone().items()
+    image = {}
+    image.update(image_tuples)
+
+    if not image['url_to_lores_img']:
+        print "ohboy"
+        referrer = request.META.get('HTTP_REFERER')
+        if not referrer.find('/view/') == (-1):
+            prev_id = int(referrer.rstrip('/').rsplit('/', 1)[1])
+            # if they hit the previous button
+            if int(image__pk) < prev_id:
+                url_to_redirect_to = "/view/" + str(int(image__pk)-1)
+            # if they hit the next button
+            # (or something fishy is going on)
+            else:
+                url_to_redirect_to = "/view/" + str(int(image__pk)+1)
+        else:
+            url_to_redirect_to = "/view_random" 
+            
+        return HttpResponseRedirect(url_to_redirect_to)
+
     def floorify(id):
         ## mod 100 the image id numbers to make smarter folders
         floor = id - id % 100
         floored = str(floor).zfill(5)[0:3]+"XX"
         return floored
-    db_connection = get_metadata_db_connection()
-    image_tuples = db_connection.execute("select * from phil where id = %s" % image__pk).fetchone().items()
-    image = {}
-    image.update(image_tuples)
     floorified = floorify(image['id'])
     id_zfilled = str(image['id']).zfill(5)
     image_urls = {
