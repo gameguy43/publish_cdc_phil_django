@@ -3,8 +3,20 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+
 # path to here, including the mysite dir at the end. with trailing slash
 ABS_PATH_TO_THIS_REPO = '/home/pyrak/workspace/rod/publish_cdc_phil_django/mysite/'
+
+DATA_ROOT = ABS_PATH_TO_THIS_REPO + 'static/data/'
+
+data_sqlite_db_user =  ''
+data_sqlite_db_pass =  ''
+data_sqlite_db_host =  ''
+data_sqlite_db_db = DATA_ROOT + 'metadata.sqlite'
+
+#data_sqlite_db = create_engine('sqlite://%s:%s@%s/%s' % (data_sqlite_db_user, data_sqlite_db_pass, data_sqlite_db_host, data_sqlite_db_db))
+
+METADATA_ENGINE = 'sqlite://%s:%s@%s/%s' % (data_sqlite_db_user, data_sqlite_db_pass, data_sqlite_db_host, data_sqlite_db_db)
 
 
 ADMINS = (
