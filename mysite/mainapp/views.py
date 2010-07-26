@@ -81,6 +81,8 @@ def view_image(request, image__pk):
         return retval
 
     image['links'] = links_to_html(image['links'])
+    image['next_id'] = int(image['id']) + 1
+    image['prev_id'] = int(image['id']) - 1
 
     return render_to_response('image.html', {'image': image, 'image_urls': image_urls})
 
