@@ -8,6 +8,7 @@ TEMPLATE_DEBUG = DEBUG
 ABS_PATH_TO_THIS_REPO = '/home/pyrak/workspace/rod/publish_cdc_phil_django/mysite/'
 
 DATA_ROOT = ABS_PATH_TO_THIS_REPO + 'static/data/'
+RELATIVE_DATA_ROOT = '/static/data/'
 
 data_sqlite_db_user =  ''
 data_sqlite_db_pass =  ''
