@@ -22,7 +22,7 @@ def about(request):
     return render_to_response('index.html')
 
 def view_random(request):
-    highest_image_pk = 500
+    highest_image_pk = 12049
     # TODO: actually write code to figure out the above
     random_image_pk = random.randrange(highest_image_pk)
     url_to_redirect_to = "view/" + str(random_image_pk)
