@@ -91,8 +91,10 @@ def view_image(request, image__pk):
         retval += "</ul>"
         return retval
 
-    image['links'] = links_to_html(image['links'])
-    image['categories'] = categories_to_html(image['categories'])
+    if image['links']:
+        image['links'] = links_to_html(image['links'])
+    if image['categories']:
+        image['categories'] = categories_to_html(image['categories'])
 
     image['next_id'] = int(image['id']) + 1
     image['prev_id'] = int(image['id']) - 1
