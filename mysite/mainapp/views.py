@@ -101,4 +101,11 @@ def view_image(request, image__pk):
     image['next_id'] = int(image['id']) + 1
     image['prev_id'] = int(image['id']) - 1
 
+    image['desc'] = image['desc'].decode('utf-8')
+
+
+    thestr = u'<td><b>In this 1993 image, the front of a women\u2019s clinic revealed a front door that was accessed via a two-step stoop, which made accessibility an issue for the wheelchair-seated man shown here who\u2019d just exited the premises. Visits by individuals having problems with mobility, prompted the installation of a temporary plywood ramp. Though the temporary ramp made access easier for the mobility-challenged, it was constructed in such a way as to make it a dangerous, though short-term solution (see PHIL 9022 - 9025). PHIL image 9027 - 9029 depicted a long-term, permanent solution using a brick, concrete, and metal ramp. It was not the perfect solution, for it lacked adequate maneuvering room near the clinic doorway. It also clearly appeared as an add-on, or after-the-fact solution that protruded into the wide sidewalk, while attempting to blend in with the existing buildings by using brick, colored concrete, and wrought iron rails. Stairs had also been provided.</b><p>\u201cThe Center for Universal Design, CUD, is a national research, information, and technical assistance center that evaluates, develops, and promotes universal design in housing, public and commercial facilities, and related products.\u201d \u201cThe Center conducts original research to learn what design solutions are appropriate for the widest diversity of users, and what tools are most useful to practitioners wishing to successfully practice universal design. The Center collaborates with builders and manufacturers on the development of new design solutions. It also develops publications and instructional materials, and provides information, referrals and technical assistance to individuals with disabilities, families, and professionals nationwide and internationally.\u201c</p></td>'
+
+    image['desc'] = thestr
+
     return render_to_response('image.html', {'image': image, 'image_urls': image_urls})
